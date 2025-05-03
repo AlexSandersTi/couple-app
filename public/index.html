@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo do Casal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Aplicativo do Casal</h1>
+        <nav>
+            <!-- Adicionar links de navegação aqui (ex: Compras, Despesas, Finanças) -->
+            <button id="logout-button" style="display: none;">Logout</button>
+        </nav>
+    </header>
+
+    <main id="app">
+        <h2>Bem-vindo!</h2>
+        <p>Selecione uma funcionalidade.</p>
+
+        <!-- Seção da Lista de Compras -->
+        <section id="shopping-list-section">
+            <h3>Listas de Compras</h3>
+            <div id="create-list-form">
+                <h4>Criar Nova Lista</h4>
+                <input type="text" id="new-list-name" placeholder="Nome da lista" required>
+                <button id="create-list-button">Criar Lista</button>
+            </div>
+            <div id="shopping-lists-container">
+                <h4>Suas Listas</h4>
+                <ul id="shopping-lists"></ul>
+            </div>
+            <div id="selected-list-details" style="display: none;">
+                <h4 id="selected-list-name"></h4>
+                <button id="delete-list-button">Excluir Lista</button>
+                <div id="add-item-form">
+                    <h5>Adicionar Item</h5>
+                    <input type="text" id="new-item-name" placeholder="Nome do item" required>
+                    <input type="text" id="new-item-quantity" placeholder="Quantidade (opcional)">
+                    <button id="add-item-button">Adicionar Item</button>
+                </div>
+                <h5>Itens</h5>
+                <ul id="shopping-items"></ul>
+            </div>
+        </section>
+
+        <!-- Seção de Despesas -->
+        <section id="expense-tracking-section">
+            <h3>Registro de Despesas</h3>
+            <div id="add-expense-form">
+                <h4>Registrar Nova Despesa</h4>
+                <input type="text" id="expense-description" placeholder="Descrição" required>
+                <input type="number" id="expense-amount" placeholder="Valor" step="0.01" required>
+                <input type="date" id="expense-date" required>
+                <select id="expense-category">
+                    <option value="">-- Selecione a Categoria --</option>
+                    <!-- Categorias serão carregadas aqui -->
+                </select>
+                <button id="add-expense-button">Registrar Despesa</button>
+            </div>
+            <div id="expense-list-container">
+                <h4>Histórico de Despesas</h4>
+                <!-- Filtros podem ser adicionados aqui -->
+                <ul id="expense-list"></ul>
+            </div>
+        </section>
+
+        <!-- Seção de Gestão Financeira -->
+        <section id="financial-management-section">
+            <h3>Resumo Financeiro (Mês Atual)</h3>
+            <div id="financial-summary">
+                <p><strong>Total Gasto:</strong> <span id="summary-total-spent">Carregando...</span></p>
+                <h4>Gastos por Categoria:</h4>
+                <ul id="summary-spent-by-category"></ul>
+            </div>
+            <!-- Funcionalidades de orçamento podem ser adicionadas aqui -->
+        </section>
+
+        <!-- Seção de Relatórios Analíticos -->
+        <section id="analytical-reports-section">
+            <h3>Relatórios Analíticos</h3>
+            <div id="spending-trend-report">
+                <h4>Tendência de Gastos (Últimos 6 Meses)</h4>
+                <div id="spending-trend-chart">Carregando gráfico...</div>
+                <!-- Dados brutos podem ser exibidos aqui também -->
+                <ul id="spending-trend-data"></ul> 
+            </div>
+            <!-- Outros relatórios podem ser adicionados aqui -->
+        </section>
+
+    </main>
+
+    <div id="message"></div> <!-- Para mensagens gerais -->
+
+    <script src="script.js"></script>
+</body>
+</html>

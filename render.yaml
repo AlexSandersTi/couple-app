@@ -1,0 +1,46 @@
+# render.yaml - Exemplo de configuração para Render.com
+
+services:
+  # Serviço para o Backend (Node.js/Express)
+  - type: web
+    name: couple-app-backend # Nome do serviço no Render
+    env: node
+    plan: free # Ou um plano pago, se necessário
+    # Região (opcional, ex: oregon, frankfurt)
+    # region: oregon 
+    buildCommand: "cd server && npm install" # Comando para instalar dependências
+    startCommand: "cd server && node server.js" # Comando para iniciar o servidor
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET # Chave secreta para JWT - Gere uma segura!
+        generateValue: true # Render pode gerar um valor aleatório seguro
+      # DATABASE_URL será injetado automaticamente pelo Render ao conectar um banco de dados PostgreSQL
+      # - key: DATABASE_URL
+      #   fromDatabase:
+      #     name: couple-app-db # Nome do serviço de banco de dados no Render
+      #     property: connectionString
+
+  # Serviço para o Banco de Dados (PostgreSQL)
+  # Crie este serviço separadamente no dashboard do Render
+  # - type: pserv
+  #   name: couple-app-db
+  #   env: postgres
+  #   plan: free # Ou um plano pago
+  #   # postgresqlVersion: 14 # Opcional: especificar versão
+  #   # diskGiB: 1 # Opcional: especificar tamanho do disco
+
+# Configuração para o Frontend (Vercel)
+# O frontend (diretório /public) deve ser implantado separadamente na Vercel.
+# 1. Crie um novo projeto na Vercel.
+# 2. Conecte seu repositório Git.
+# 3. Configure o "Root Directory" para apontar para o diretório que contém a pasta /public (provavelmente a raiz do projeto).
+# 4. Configure o "Output Directory" para "public".
+# 5. Configure o "Install Command" para não fazer nada ou apenas "echo 'No build needed'".
+# 6. Configure o "Build Command" para não fazer nada.
+# 7. Adicione uma variável de ambiente no Vercel para apontar para a URL do seu backend no Render:
+#    Ex: API_BASE_URL = https://seu-backend-no-render.onrender.com
+# 8. Modifique o script.js no frontend para usar essa variável de ambiente ao fazer chamadas fetch:
+#    const API_URL = process.env.API_BASE_URL || ''; // Vercel injeta variáveis de ambiente
+#    fetch(`${API_URL}/api/auth/login`, { ... });
+
